@@ -1,0 +1,14 @@
+hostname {{ name }}
+
+{% for iface in interfaces %}
+interface {{ iface.name }}
+ ip address {{ iface.ip }} {{ iface.mask }}
+ no shutdown
+{% endfor %}
+
+router rip
+ version 2
+ no auto-summary
+{% for net in rip_networks %}
+ network {{ net }}
+{% endfor %}
