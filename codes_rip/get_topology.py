@@ -127,6 +127,7 @@ def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None, topology
 
     # --- 3b. EXPORT TOPOLOGY.JSON ---
     topology_data = {
+        "ip_base": ip_base,
         "routers": [],
         "links": []
     }
@@ -142,10 +143,10 @@ def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None, topology
     # Ajouter les liens
     for link in links:
         topology_data["links"].append({
-            "router_a": link["a"],
-            "interface_a": link["a_iface"],
-            "router_b": link["b"],
-            "interface_b": link["b_iface"]
+            "a": link["a"],
+            "a_iface": link["a_iface"],
+            "b": link["b"],
+            "b_iface": link["b_iface"]
         })
 
     # Sauvegarder topology.json

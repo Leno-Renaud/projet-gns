@@ -1,4 +1,5 @@
 {
+  "ip_base": "10.0.0.0/30",
   "routers": [
     {
       "name": "R1",
@@ -124,40 +125,40 @@
   ],
   "links": [
     {
-      "router_a": "R1",
-      "interface_a": "GigabitEthernet1/0",
-      "router_b": "R2",
-      "interface_b": "GigabitEthernet1/0"
+      "a": "R1",
+      "a_iface": "GigabitEthernet1/0",
+      "b": "R2",
+      "b_iface": "GigabitEthernet1/0"
     },
     {
-      "router_a": "R2",
-      "interface_a": "GigabitEthernet2/0",
-      "router_b": "R3",
-      "interface_b": "GigabitEthernet2/0"
+      "a": "R2",
+      "a_iface": "GigabitEthernet2/0",
+      "b": "R3",
+      "b_iface": "GigabitEthernet2/0"
     },
     {
-      "router_a": "R7",
-      "interface_a": "GigabitEthernet1/0",
-      "router_b": "R1",
-      "interface_b": "GigabitEthernet2/0"
+      "a": "R7",
+      "a_iface": "GigabitEthernet1/0",
+      "b": "R1",
+      "b_iface": "GigabitEthernet2/0"
     },
     {
-      "router_a": "R3",
-      "interface_a": "GigabitEthernet1/0",
-      "router_b": "R4",
-      "interface_b": "GigabitEthernet1/0"
+      "a": "R3",
+      "a_iface": "GigabitEthernet1/0",
+      "b": "R4",
+      "b_iface": "GigabitEthernet1/0"
     },
     {
-      "router_a": "R4",
-      "interface_a": "GigabitEthernet2/0",
-      "router_b": "R6",
-      "interface_b": "GigabitEthernet1/0"
+      "a": "R4",
+      "a_iface": "GigabitEthernet2/0",
+      "b": "R6",
+      "b_iface": "GigabitEthernet1/0"
     },
     {
-      "router_a": "R6",
-      "interface_a": "GigabitEthernet2/0",
-      "router_b": "R5",
-      "interface_b": "GigabitEthernet1/0"
+      "a": "R6",
+      "a_iface": "GigabitEthernet2/0",
+      "b": "R5",
+      "b_iface": "GigabitEthernet1/0"
     }
   ]
 }

@@ -21,12 +21,12 @@ def main():
     base_dir = Path(__file__).parent.absolute()
     gns3_project_file = r"C:\Users\Hector\Desktop\INSA Lyon\3A-TC\S1\GNS Projet\blank_project\blank_project.gns3"
     ip_base = "10.0.0.0/30"
-    topology_name = "topology.json"
+    topology_file = base_dir / "topology.json"
     
 
-    extract_topology(gns3_project_file, ip_base, base_dir, topology_name)
+    extract_topology(gns3_project_file, ip_base, base_dir, str(topology_file))
     
-    cfg_generation(topology_name)
+    cfg_generation(str(topology_file))
 
 
 # Point d'entrée : s'exécute uniquement si le script est lancé directement
