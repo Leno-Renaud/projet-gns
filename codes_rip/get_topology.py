@@ -157,13 +157,3 @@ def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None):
     print(f"\nTerminé ! La topologie a été extraite depuis {gns3_path}")
     
     return topology_data
-
-
-if __name__ == "__main__":
-    # --- CONFIGURATION PAR DÉFAUT ---
-    BASE_DIR = Path(__file__).parent.absolute()
-    GNS3_PROJECT_FILE = r"C:\Users\Hector\Desktop\INSA Lyon\3A-TC\S1\GNS Projet\blank_project\blank_project.gns3"
-    IP_BASE = "10.0.0.0/30"
-    
-    # Exécution
-    extract_topology(GNS3_PROJECT_FILE, IP_BASE, BASE_DIR)
