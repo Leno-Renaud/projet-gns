@@ -8,3 +8,6 @@ def main():
     IP_BASE = "10.0.0.0/30"
     extract_topology(GNS3_PROJECT_FILE, IP_BASE, BASE_DIR)
     cfg_generation("topologie.json")
+
+
+main()
