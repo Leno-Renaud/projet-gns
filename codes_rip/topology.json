@@ -3,26 +3,161 @@
     {
       "name": "R1",
       "interfaces": [
-        {"name": "GigabitEthernet1/0"}
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.1",
+          "mask": "255.255.255.252"
+        },
+        {
+          "name": "GigabitEthernet2/0",
+          "ip": "10.0.0.10",
+          "mask": "255.255.255.252"
+        }
+      ],
+      "rip_networks": [
+        "10.0.0.0",
+        "10.0.0.8"
       ]
     },
     {
       "name": "R2",
       "interfaces": [
-        {"name": "GigabitEthernet1/0"},
-        {"name": "GigabitEthernet2/0"}
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.2",
+          "mask": "255.255.255.252"
+        },
+        {
+          "name": "GigabitEthernet2/0",
+          "ip": "10.0.0.5",
+          "mask": "255.255.255.252"
+        }
+      ],
+      "rip_networks": [
+        "10.0.0.0",
+        "10.0.0.4"
       ]
     },
     {
       "name": "R3",
       "interfaces": [
-        {"name": "GigabitEthernet2/0"}
+        {
+          "name": "GigabitEthernet2/0",
+          "ip": "10.0.0.6",
+          "mask": "255.255.255.252"
+        },
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.13",
+          "mask": "255.255.255.252"
+        }
+      ],
+      "rip_networks": [
+        "10.0.0.12",
+        "10.0.0.4"
+      ]
+    },
+    {
+      "name": "R4",
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.14",
+          "mask": "255.255.255.252"
+        },
+        {
+          "name": "GigabitEthernet2/0",
+          "ip": "10.0.0.17",
+          "mask": "255.255.255.252"
+        }
+      ],
+      "rip_networks": [
+        "10.0.0.12",
+        "10.0.0.16"
+      ]
+    },
+    {
+      "name": "R5",
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.22",
+          "mask": "255.255.255.252"
+        }
+      ],
+      "rip_networks": [
+        "10.0.0.20"
+      ]
+    },
+    {
+      "name": "R6",
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.18",
+          "mask": "255.255.255.252"
+        },
+        {
+          "name": "GigabitEthernet2/0",
+          "ip": "10.0.0.21",
+          "mask": "255.255.255.252"
+        }
+      ],
+      "rip_networks": [
+        "10.0.0.16",
+        "10.0.0.20"
+      ]
+    },
+    {
+      "name": "R7",
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.0.9",
+          "mask": "255.255.255.252"
+        }
+      ],
+      "rip_networks": [
+        "10.0.0.8"
       ]
     }
   ],
   "links": [
-    {"a": "R1", "a_iface": "GigabitEthernet1/0", "b": "R2", "b_iface": "GigabitEthernet1/0"},
-    {"a": "R2", "a_iface": "GigabitEthernet2/0", "b": "R3", "b_iface": "GigabitEthernet2/0"}
-  ],
-  "ip_base": "10.0.0.0/30"
+    {
+      "router_a": "R1",
+      "interface_a": "GigabitEthernet1/0",
+      "router_b": "R2",
+      "interface_b": "GigabitEthernet1/0"
+    },
+    {
+      "router_a": "R2",
+      "interface_a": "GigabitEthernet2/0",
+      "router_b": "R3",
+      "interface_b": "GigabitEthernet2/0"
+    },
+    {
+      "router_a": "R7",
+      "interface_a": "GigabitEthernet1/0",
+      "router_b": "R1",
+      "interface_b": "GigabitEthernet2/0"
+    },
+    {
+      "router_a": "R3",
+      "interface_a": "GigabitEthernet1/0",
+      "router_b": "R4",
+      "interface_b": "GigabitEthernet1/0"
+    },
+    {
+      "router_a": "R4",
+      "interface_a": "GigabitEthernet2/0",
+      "router_b": "R6",
+      "interface_b": "GigabitEthernet1/0"
+    },
+    {
+      "router_a": "R6",
+      "interface_a": "GigabitEthernet2/0",
+      "router_b": "R5",
+      "interface_b": "GigabitEthernet1/0"
+    }
+  ]
 }
