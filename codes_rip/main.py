@@ -26,9 +26,7 @@ def main():
 
     extract_topology(gns3_project_file, ip_base, base_dir, topology_name)
     
-    cfg_generation(topology_name)
+    cfg_generation(topology_name, ip_base)
 
-
-# Point d'entrée : s'exécute uniquement si le script est lancé directement
 if __name__ == "__main__":
     main()

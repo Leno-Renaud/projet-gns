@@ -2,7 +2,7 @@ import json
 import ipaddress
 from jinja2 import Template
 
-def cfg_generation(topology):
+def cfg_generation(topology, ip_base):
     # --- ÉTAPE 1 : Charger le fichier de topologie JSON ---
     # Ouvre le fichier topology.json et le charge en dictionnaire Python
     with open(topology) as f:
@@ -10,12 +10,12 @@ def cfg_generation(topology):
 
     # --- Crée un dictionnaire des routeurs indexé par nom ---
     routers_data = {r["name"]: r for r in topo["routers"]}
-    print(f"ROUTEUR DATA {routers_data}\n")
+    print(f"ROUTEUR DATA: {routers_data}\n")
     # --- Récupère la liste de tous les liens (connexions entre routeurs) ---
     links = topo["links"]
-    print(f"LIEN {links}\n")
+    print(f"LIEN: {links}\n")
     # --- Crée l'objet réseau de base pour l'allocation d'adresses IP ---
-    base_net = ipaddress.ip_network(topo["ip_base"])
+    base_net = ipaddress.ip_network(ip_base)
 
     # --- Structures internes pour stocker la configuration ---
     # Dictionnaire qui associe chaque routeur à sa liste d'interfaces
@@ -29,9 +29,9 @@ def cfg_generation(topology):
     # --- Boucle : pour chaque lien, on génère les IPs et les configurations ---
     for link in links:
         # Récupère le routeur source (a) et le nom de son interface
-        a, a_iface_name = link["a"], link["a_iface"]
+        a, a_iface_name = link["router_a"], link["interface_a"]
         # Récupère le routeur destination (b) et le nom de son interface
-        b, b_iface_name = link["b"], link["b_iface"]
+        b, b_iface_name = link["router_b"], link["interface_b"]
 
         # Si le routeur a n'existe pas dans interfaces_cfg, crée une liste vide
         if a not in interfaces_cfg:
@@ -93,3 +93,5 @@ def cfg_generation(topology):
             f.write(config)
 
     print("Configurations générées avec succès.")
+
+cfg_generation("topology.json", "10.0.0.0/30")
