@@ -29,9 +29,9 @@ def cfg_generation(topology, ip_base):
     # --- Boucle : pour chaque lien, on génère les IPs et les configurations ---
     for link in links:
         # Récupère le routeur source (a) et le nom de son interface
-        a, a_iface_name = link["router_a"], link["interface_a"]
+        a, a_iface_name = link["a"], link["a_iface"]
         # Récupère le routeur destination (b) et le nom de son interface
-        b, b_iface_name = link["router_b"], link["interface_b"]
+        b, b_iface_name = link["b"], link["b_iface"]
 
         # Si le routeur a n'existe pas dans interfaces_cfg, crée une liste vide
         if a not in interfaces_cfg:
