@@ -18,15 +18,13 @@ def main():
     3. Crée les fichiers .cfg pour chaque routeur avec RIP configuré
     """
     # --- Configuration des paramètres ---
+    # Répertoire de travail : où se trouve ce script
     base_dir = Path(__file__).parent.absolute()
     gns3_project_file = r"C:\Users\Hector\Desktop\INSA Lyon\3A-TC\S1\GNS Projet\blank_project\blank_project.gns3"
     ip_base = "10.0.0.0/30"
-    topology_name = "topology.json"
-    
-
-    extract_topology(gns3_project_file, ip_base, base_dir, topology_name)
-    
-    cfg_generation(topology_name, ip_base)
+    topology_filename = "topology.json"
+    extract_topology(gns3_project_file, ip_base, base_dir, topology_filename)
+    cfg_generation(topology_filename, ip_base)
 
 if __name__ == "__main__":
     main()
