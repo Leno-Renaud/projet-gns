@@ -17,7 +17,7 @@ def get_interface_name(adapter, port):
         return f"GigabitEthernet{adapter}/{port}"
 
 # --- FONCTION PRINCIPALE ---
-def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None, topology_name="topology.json"):
+def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None, output_name="topology.json"):
     """
     Extrait la topologie d'un fichier GNS3 et génère un fichier topology.json
     
@@ -25,6 +25,7 @@ def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None, topology
         gns3_file (str): Chemin vers le fichier .gns3
         ip_base (str): Base pour l'adressage IP (défaut: "10.0.0.0/30")
         output_dir (str): Répertoire de sortie (défaut: répertoire du script)
+        output_name (str): Nom du fichier de sortie (défaut: "topology.json")
     
     Returns:
         dict: Les données de topologie extraites
@@ -150,7 +151,7 @@ def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None, topology
         })
 
     # Sauvegarder topology.json
-    topology_file = output_dir / topology_name
+    topology_file = output_dir / output_name
     with open(topology_file, "w", encoding="utf-8") as f:
         json.dump(topology_data, f, indent=2, ensure_ascii=False)
     print(f"Topologie exportée : {topology_file}")
