@@ -127,7 +127,6 @@ def generate_all_configs(topology, output_dir="configs"):
     # Generate IPv6 addresses for all links
     print("Generating IPv6 addresses for links...")
     ipv6_assignments = generate_ipv6_addresses(topology)
-
     # Print IPv6 assignments for verification
     print("\nIPv6 Address Assignments:")
     print("-" * 50)
