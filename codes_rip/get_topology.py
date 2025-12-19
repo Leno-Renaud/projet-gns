@@ -23,7 +23,7 @@ def extract_topology(gns3_file, ip_base="2000:1::/64", output_dir=None, output_n
     
     Args:
         gns3_file (str): Chemin vers le fichier .gns3
-        ip_base (str): Base pour l'adressage IP (défaut: "fd00::/126")
+        ip_base (str): Base pour l'adressage IPv6 (défaut: "2000:1::/64")
         output_dir (str): Répertoire de sortie (défaut: répertoire du script)
         output_name (str): Nom du fichier de sortie (défaut: "topology.json")
     
@@ -101,9 +101,14 @@ def extract_topology(gns3_file, ip_base="2000:1::/64", output_dir=None, output_n
         a, a_iface_name = link["a"], link["a_iface"]
         b, b_iface_name = link["b"], link["b_iface"]
 
-        hosts = list(current_net.hosts())
-        ip_a = hosts[0]
-        ip_b = hosts[1]
+        # IPv6: éviter list(hosts()) sur /64 -> utiliser des offsets
+        if base_net.version == 6:
+            ip_a = ipaddress.IPv6Address(int(current_net.network_address) + 1)
+            ip_b = ipaddress.IPv6Address(int(current_net.network_address) + 2)
+        else:
+            hosts = list(current_net.hosts())
+            ip_a = hosts[0]
+            ip_b = hosts[1]
 
         # Configuration pour le routeur A
         interfaces_cfg[a].append({
@@ -121,10 +126,10 @@ def extract_topology(gns3_file, ip_base="2000:1::/64", output_dir=None, output_n
         })
         rip_networks[b].add(str(current_net.network_address))
 
-        # Calcul du prochain sous-réseau
-        current_net = ipaddress.ip_network(
-            int(current_net.network_address) + current_net.num_addresses
-        ).supernet(new_prefix=current_net.prefixlen)
+        # Calcul du prochain sous-réseau (sans supernet, et sans lister les hôtes)
+        next_net_int = int(current_net.network_address) + current_net.num_addresses
+        next_addr = ipaddress.ip_address(next_net_int)
+        current_net = ipaddress.ip_network(f"{next_addr}/{current_net.prefixlen}", strict=False)
 
     # --- 3b. EXPORT TOPOLOGY.JSON ---
     topology_data = {
