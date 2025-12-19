@@ -1,14 +1,21 @@
 import json
 from jinja2 import Template
+import re
+
+def generate_router_id(router_name):
+    """
+    Génère un router-id IPv4 à partir du nom du routeur
+    Ex: R1 -> 1.1.1.1
+    """
+    match = re.search(r"\d+", router_name)
+    if match:
+        n = int(match.group())
+        return f"{n}.{n}.{n}.{n}"
+    else:
+        return "1.1.1.1"
+
 
 def cfg_generation_bgp(topology, output_dir="."):
-    """
-    Génère les configurations BGP à partir du fichier topology_bgp.json
-    
-    Args:
-        topology (str): Chemin vers le fichier topology_bgp.json
-        output_dir (str): Répertoire où écrire les fichiers .cfg
-    """
     with open(topology) as f:
         topo = json.load(f)
 
@@ -16,11 +23,13 @@ def cfg_generation_bgp(topology, output_dir="."):
     
     template = Template(open("router_bgp.j2").read())
     
-    for router_name in routers_data.keys():
-        router = routers_data[router_name]
+    for router_name, router in routers_data.items():
+        router_id = generate_router_id(router_name)
+
         config = template.render(
             name=router_name,
             asn=router["asn"],
+            router_id=router_id,
             interfaces=router["interfaces"],
             neighbors=router["neighbors"]
         )
@@ -28,6 +37,10 @@ def cfg_generation_bgp(topology, output_dir="."):
         output_file = f"{output_dir}/{router_name}.cfg"
         with open(output_file, "w") as f:
             f.write(config)
+        
         print(f"[BGP] Config générée : {output_file}")
     
     print("[BGP] Configurations BGP générées avec succès.")
+
+
+cfg_generation_bgp("topology_bgp.json")

@@ -5,7 +5,7 @@ ipv6 cef
 
 {% for iface in interfaces %}
 interface {{ iface.name }}
- no ipv6 address
+ no ip address
  ipv6 nd dad attempts 0
  ipv6 address {{ iface.ip }}/{{ iface.prefix }}
  ipv6 enable
@@ -13,6 +13,7 @@ interface {{ iface.name }}
 {% endfor %}
 
 router bgp {{ asn }}
+ bgp router-id {{ router_id }}
  bgp log-neighbor-changes
  !
 {% for neighbor in neighbors %}
