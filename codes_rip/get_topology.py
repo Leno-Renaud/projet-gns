@@ -17,13 +17,13 @@ def get_interface_name(adapter, port):
         return f"GigabitEthernet{adapter}/{port}"
 
 # --- FONCTION PRINCIPALE ---
-def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None, output_name="topology.json"):
+def extract_topology(gns3_file, ip_base="fd00::/126", output_dir=None, output_name="topology.json"):
     """
     Extrait la topologie d'un fichier GNS3 et génère un fichier topology.json
     
     Args:
         gns3_file (str): Chemin vers le fichier .gns3
-        ip_base (str): Base pour l'adressage IP (défaut: "10.0.0.0/30")
+        ip_base (str): Base pour l'adressage IP (défaut: "fd00::/126")
         output_dir (str): Répertoire de sortie (défaut: répertoire du script)
         output_name (str): Nom du fichier de sortie (défaut: "topology.json")
     
@@ -109,7 +109,7 @@ def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None, output_n
         interfaces_cfg[a].append({
             "name": a_iface_name,
             "ip": str(ip_a),
-            "mask": str(current_net.netmask)
+            "prefix": current_net.prefixlen
         })
         rip_networks[a].add(str(current_net.network_address))
 
@@ -117,7 +117,7 @@ def extract_topology(gns3_file, ip_base="10.0.0.0/30", output_dir=None, output_n
         interfaces_cfg[b].append({
             "name": b_iface_name,
             "ip": str(ip_b),
-            "mask": str(current_net.netmask)
+            "prefix": current_net.prefixlen
         })
         rip_networks[b].add(str(current_net.network_address))
 

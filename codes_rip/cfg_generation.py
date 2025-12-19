@@ -1,5 +1,4 @@
 import json
-import ipaddress
 from jinja2 import Template
 
 def cfg_generation(topology, ip_base):
@@ -18,3 +17,5 @@ def cfg_generation(topology, ip_base):
         )
         with open(f"{router_name}.cfg", "w") as f:
             f.write(config)
+    
+    print("Configurations RIPng générées avec succès.")

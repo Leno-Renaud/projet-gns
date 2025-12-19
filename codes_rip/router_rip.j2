@@ -1,14 +1,11 @@
 hostname {{ name }}
 
+ipv6 unicast-routing
+ipv6 router rip RIPNG
+
 {% for iface in interfaces %}
 interface {{ iface.name }}
- ip address {{ iface.ip }} {{ iface.mask }}
+ ipv6 address {{ iface.ip }}/{{ iface.prefix }}
+ ipv6 rip RIPNG enable
  no shutdown
-{% endfor %}
-
-router rip
- version 2
- no auto-summary
-{% for net in rip_networks %}
- network {{ net }}
 {% endfor %}
